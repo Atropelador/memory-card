@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 
-function Card({ poke }) {
+function Card({ poke, cardClicked }) {
   const [pokemon, setPokemon] = useState({});
 
   useEffect(() => {
@@ -15,7 +16,7 @@ function Card({ poke }) {
 
   return (
     <>
-      <div className="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6">
+      <button className="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6" onClick={() => cardClicked(pokemon.name)}>
         <div className="m-2.5 overflow-hidden rounded-md h-80 flex justify-center items-center">
           <img
             className="w-full h-full object-cover"
@@ -28,7 +29,7 @@ function Card({ poke }) {
             {pokemon.name}
           </h4>
         </div>
-      </div>
+      </button>
     </>
   );
 }
