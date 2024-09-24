@@ -47,16 +47,16 @@ function Game() {
   };
 
   return (
-    <>
+    <div className="font-mono">
       <Header score={score} maxScore={maxScore}></Header>
-      <div className="border p-10">
+      <div className=" p-10 background">
         <div className="grid grid-cols-5 gap-10">
           {pokeNames?.map((poke) => (
             <Card key={poke} poke={poke} cardClicked={cardClicked}></Card>
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

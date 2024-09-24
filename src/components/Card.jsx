@@ -14,9 +14,16 @@ function Card({ poke, cardClicked }) {
       .catch((error) => console.error(error));
   }, [poke]);
 
+  const capitalizeFirstLetter = (string) => {
+    if (string){
+      return string.charAt(0).toUpperCase() + string.slice(1); 
+    }
+    
+  }
+
   return (
     <>
-      <button className="flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg my-6" onClick={() => cardClicked(pokemon.name)}>
+      <button className="flex flex-col bg-white hover:scale-105 shadow-sm border border-slate-200 rounded-lg my-6 bg-blue-100 hover:shadow-lg hover:shadow-blue-500" onClick={() => cardClicked(pokemon.name)}>
         <div className="m-2.5 overflow-hidden rounded-md h-80 flex justify-center items-center">
           <img
             className="w-full h-full object-cover"
@@ -26,7 +33,7 @@ function Card({ poke, cardClicked }) {
         </div>
         <div className="p-6 text-center">
           <h4 className="mb-1 text-xl font-semibold text-slate-800">
-            {pokemon.name}
+            {capitalizeFirstLetter(pokemon.name)}
           </h4>
         </div>
       </button>
