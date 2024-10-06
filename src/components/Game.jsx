@@ -69,7 +69,7 @@ function Game() {
     <div className="font-mono">
       <Header score={score} maxScore={maxScore}></Header>
       <div className=" p-10 background">
-        <div className="grid grid-cols-5 gap-10">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
           {pokeNames?.map((poke) => (
             <Card key={poke} poke={poke} cardClicked={cardClicked}></Card>
           ))}
