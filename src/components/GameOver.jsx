@@ -4,7 +4,7 @@ import GeneralModal from "./GeneralModal";
 import sadpikachu from "../assets/sad-pikachu.gif";
 
 function GameOver({ score, maxScore, showGameOver, restart }) {
-  const textHeader = "Game Over :(";
+  const textHeader = "Game Over";
   const bodyText = "Better luck next time!";
   return (
     <>

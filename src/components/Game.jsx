@@ -5,7 +5,7 @@ import GameCompleted from "./GameCompleted";
 import { useState } from "react";
 
 function Game() {
-  const MAX_POSSIBLE_SCORE = 3;
+  const MAX_POSSIBLE_SCORE = 10;
   const [score, setScore] = useState(0);
   const [maxScore, setMaxScore] = useState(0);
   const [showGameOver, setShowGameOver] = useState(false);
