@@ -1,10 +1,15 @@
 import Header from "./Header";
 import Card from "./Card";
+import GameOver from "./GameOver";
+import GameCompleted from "./GameCompleted";
 import { useState } from "react";
 
 function Game() {
+  const MAX_POSSIBLE_SCORE = 3;
   const [score, setScore] = useState(0);
   const [maxScore, setMaxScore] = useState(0);
+  const [showGameOver, setShowGameOver] = useState(false);
+  const [showGameCompleted, setShowGameCompleted] = useState(false);
   const [clickedPokes, setClickedPokes] = useState([]); //verify if i need to useState to render or not
   const [pokeNames, setPokeNames] = useState([
     "ditto",
@@ -30,20 +35,34 @@ function Game() {
 
   const cardClicked = (nome) => {
     console.log(nome);
-    if (!clickedPokes.find((element) => element === nome)){
-      setScore(score + 1);
-      setClickedPokes((prevClickedPokes) => [...prevClickedPokes, nome]);
-    }
-    else{
-      if (maxScore < score){
+    if (!clickedPokes.find((element) => element === nome)) {
+      setScore((prevScore) => {
+        const newScore = prevScore + 1;
+        setClickedPokes((prevClickedPokes) => [...prevClickedPokes, nome]);
+        if (newScore === MAX_POSSIBLE_SCORE) {
+          setMaxScore(newScore);
+          setShowGameCompleted(true);
+        }
+
+        return newScore;
+      });
+    } else {
+      if (maxScore < score) {
         setMaxScore(score);
       }
-      setScore(0);
-      setClickedPokes([]);
+      setShowGameOver(true);
     }
     console.log(clickedPokes);
     let newArray = shuffle(pokeNames);
     setPokeNames(newArray);
+  };
+
+  const restart = () => {
+    //mostrar no click restart
+    setShowGameCompleted(false);
+    setShowGameOver(false);
+    setScore(0);
+    setClickedPokes([]);
   };
 
   return (
@@ -54,6 +73,18 @@ function Game() {
           {pokeNames?.map((poke) => (
             <Card key={poke} poke={poke} cardClicked={cardClicked}></Card>
           ))}
+          <GameOver
+            showGameOver={showGameOver}
+            score={score}
+            maxScore={maxScore}
+            restart={restart}
+          ></GameOver>
+          <GameCompleted
+            showGameCompleted={showGameCompleted}
+            score={score}
+            maxScore={maxScore}
+            restart={restart}
+          ></GameCompleted>
         </div>
       </div>
     </div>
